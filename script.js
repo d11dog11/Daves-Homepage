@@ -1,4 +1,52 @@
 // ===================================
+// LOAD DYNAMIC CONTENT (ADMIN CHANGES)
+// ===================================
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Load all saved content
+    const contentFields = {
+        'heroTitle': 'heroTitle',
+        'heroSubtitle': 'heroSubtitle',
+        'feature1Title': 'feature1Title',
+        'feature1Desc': 'feature1Desc',
+        'feature2Title': 'feature2Title',
+        'feature2Desc': 'feature2Desc',
+        'feature3Title': 'feature3Title',
+        'feature3Desc': 'feature3Desc'
+    };
+
+    // Update text content
+    Object.keys(contentFields).forEach(key => {
+        const saved = localStorage.getItem(key);
+        if (saved) {
+            const element = document.getElementById(key);
+            if (element) {
+                element.innerHTML = saved;
+            }
+        }
+    });
+
+    // Update About section (paragraphs)
+    const aboutPara1 = localStorage.getItem('aboutPara1');
+    const aboutPara2 = localStorage.getItem('aboutPara2');
+    const aboutDiv = document.getElementById('aboutContent');
+
+    if (aboutDiv && (aboutPara1 || aboutPara2)) {
+        let html = '';
+        if (aboutPara1) html += `<p>${aboutPara1}</p>`;
+        if (aboutPara2) html += `<p>${aboutPara2}</p>`;
+        aboutDiv.innerHTML = html;
+    }
+
+    // Update Photo
+    const savedPhoto = localStorage.getItem('heroImage');
+    if (savedPhoto) {
+        const heroImg = document.getElementById('heroImage');
+        if (heroImg) heroImg.src = savedPhoto;
+    }
+});
+
+// ===================================
 // SMOOTH SCROLLING
 // ===================================
 

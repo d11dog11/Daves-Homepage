@@ -43,11 +43,10 @@
             <div class="hero-content">
                 <div class="hero-text">
                     <h1 class="hero-title">
-                        Your Path to
-                        <span class="gradient-text">Homeownership</span>
-                        Starts Here
+                        <span id="heroTitle">Your Path to <span class="gradient-text">Homeownership</span> Starts
+                            Here</span>
                     </h1>
-                    <p class="hero-subtitle">
+                    <p class="hero-subtitle" id="heroSubtitle">
                         Expert mortgage guidance with personalized service. Let's turn your dream home into reality with
                         competitive rates and seamless financing solutions.
                     </p>
@@ -67,9 +66,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="hero-image">
+                <div class="hero-image" id="heroImageContainer">
                     <div class="image-card">
-                        <img src="Headshot.jpg" alt="David Rinderknecht - Mortgage Lender">
+                        <img src="Headshot.jpg" alt="David Rinderknecht - Mortgage Lender" id="heroImage">
                     </div>
                 </div>
             </div>
@@ -87,37 +86,45 @@
                 <div class="about-card">
                     <div class="about-icon">🏡</div>
                     <h3>Your Trusted Mortgage Partner</h3>
-                    <p>
-                        With years of experience in the mortgage industry, I'm dedicated to helping families achieve
-                        their homeownership dreams. At Mortgage 1 Inc., NMLS: 129386, I provide personalized service and
-                        expert
-                        guidance throughout your entire home financing journey.
-                    </p>
-                    <p>
-                        Whether you're a first-time homebuyer, looking to refinance, or seeking an investment property
-                        loan, I'll work tirelessly to find the best mortgage solution tailored to your unique financial
-                        situation and goals.
-                    </p>
+                    <div id="aboutContent">
+                        <p>
+                            With years of experience in the mortgage industry, I'm dedicated to helping families achieve
+                            their homeownership dreams. At Mortgage 1 Inc., NMLS: 129386, I provide personalized service
+                            and
+                            expert
+                            guidance throughout your entire home financing journey.
+                        </p>
+                        <p>
+                            Whether you're a first-time homebuyer, looking to refinance, or seeking an investment
+                            property
+                            loan, I'll work tirelessly to find the best mortgage solution tailored to your unique
+                            financial
+                            situation and goals.
+                        </p>
+                    </div>
                     <div class="about-features">
                         <div class="feature-item">
                             <span class="feature-icon">💼</span>
                             <div class="feature-content">
-                                <h4>Professional Excellence</h4>
-                                <p>Committed to providing exceptional service and expert mortgage advice</p>
+                                <h4 id="feature1Title">Professional Excellence</h4>
+                                <p id="feature1Desc">Committed to providing exceptional service and expert mortgage
+                                    advice</p>
                             </div>
                         </div>
                         <div class="feature-item">
                             <span class="feature-icon">🤝</span>
                             <div class="feature-content">
-                                <h4>Personalized Approach</h4>
-                                <p>Every client receives customized solutions for their specific needs</p>
+                                <h4 id="feature2Title">Personalized Approach</h4>
+                                <p id="feature2Desc">Every client receives customized solutions for their specific needs
+                                </p>
                             </div>
                         </div>
                         <div class="feature-item">
                             <span class="feature-icon">⚡</span>
                             <div class="feature-content">
-                                <h4>Fast & Efficient</h4>
-                                <p>Streamlined process to get you from application to closing quickly</p>
+                                <h4 id="feature3Title">Fast & Efficient</h4>
+                                <p id="feature3Desc">Streamlined process to get you from application to closing quickly
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -272,11 +279,14 @@
             <div class="footer-bottom">
                 <p>&copy; 2026 David Rinderknecht - Mortgage 1 Inc. All rights reserved.</p>
                 <p class="footer-disclaimer">NMLS# 1260787 | Equal Housing Opportunity</p>
+                <div style="margin-top: 10px;">
+                    <a href="admin.html" style="color: #4b5563; font-size: 12px; text-decoration: none;">Admin Login</a>
+                </div>
             </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=1.1"></script>
 </body>
 
 </html>
