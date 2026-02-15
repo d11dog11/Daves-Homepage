@@ -129,36 +129,6 @@ window.addEventListener('scroll', () => {
 
 // Contact form handling removed to allow native form submission
 // See index.html for form action configuration
-console.log('✅ Form submission handler: Native browser submission enabled');
-console.log('Form will POST to FormSubmit.co when submitted');
-
-// Diagnostic logging
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('contactForm');
-    const submitBtn = form ? form.querySelector('button[type="submit"]') : null;
-
-    console.log('🔍 Form diagnostics:');
-    console.log('  - Form element:', form);
-    console.log('  - Form action:', form ? form.action : 'N/A');
-    console.log('  - Form method:', form ? form.method : 'N/A');
-    console.log('  - Submit button:', submitBtn);
-
-    if (form) {
-        form.addEventListener('submit', (e) => {
-            console.log('📤 Form submit event fired!');
-            console.log('  - Event:', e);
-            console.log('  - Default prevented:', e.defaultPrevented);
-        });
-    }
-
-    if (submitBtn) {
-        submitBtn.addEventListener('click', (e) => {
-            console.log('🖱️ Submit button clicked!');
-            console.log('  - Button:', e.target);
-            console.log('  - Event:', e);
-        });
-    }
-});
 
 // ===================================
 // PHONE NUMBER FORMATTING
