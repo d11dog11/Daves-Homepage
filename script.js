@@ -129,6 +129,8 @@ window.addEventListener('scroll', () => {
 
 // Contact form handling removed to allow native form submission
 // See index.html for form action configuration
+console.log('✅ Form submission handler: Native browser submission enabled');
+console.log('Form will POST to FormSubmit.co when submitted');
 
 // ===================================
 // PHONE NUMBER FORMATTING
