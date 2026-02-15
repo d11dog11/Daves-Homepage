@@ -13,7 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
         'feature2Title': 'feature2Title',
         'feature2Desc': 'feature2Desc',
         'feature3Title': 'feature3Title',
-        'feature3Desc': 'feature3Desc'
+        'feature3Desc': 'feature3Desc',
+        'contactLabel': 'contactLabel',
+        'contactTitle': 'contactTitle',
+        'contactDesc': 'contactDesc',
+        'benefit1': 'benefit1',
+        'benefit2': 'benefit2',
+        'benefit3': 'benefit3',
+        'benefit4': 'benefit4'
     };
 
     // Update text content
@@ -120,57 +127,8 @@ window.addEventListener('scroll', () => {
 // CONTACT FORM HANDLING
 // ===================================
 
-const contactForm = document.getElementById('contactForm');
-const formSuccess = document.getElementById('formSuccess');
-
-contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    // Disable submit button
-    const submitButton = contactForm.querySelector('button[type="submit"]');
-    const originalButtonText = submitButton.innerHTML;
-    submitButton.disabled = true;
-    submitButton.innerHTML = 'Sending...';
-
-    // Get form data
-    const formData = new FormData(contactForm);
-
-    // Add Formsubmit fields
-    formData.append('_subject', `New Lead from Website: ${formData.get('firstName')} ${formData.get('lastName')}`);
-    formData.append('_captcha', 'false');
-    formData.append('_template', 'table');
-
-    try {
-        const response = await fetch('https://formsubmit.co/drinderknecht@mortgageone.com', {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'Accept': 'application/json'
-            }
-        });
-
-        if (response.ok) {
-            // Show success message
-            contactForm.classList.add('hidden');
-            formSuccess.classList.remove('hidden');
-            contactForm.reset();
-        } else {
-            throw new Error('Form submission failed');
-        }
-
-    } catch (error) {
-        console.error('Form submission error:', error);
-
-        // Create error display
-        const errorDiv = document.createElement('div');
-        errorDiv.style.cssText = 'background: #ff4444; color: white; padding: 20px; margin: 20px 0; border-radius: 8px;';
-        errorDiv.innerHTML = `<strong>Error:</strong> ${error.message}<br><br>Please email drinderknecht@mortgageone.com directly.`;
-        contactForm.insertAdjacentElement('beforebegin', errorDiv);
-
-        submitButton.disabled = false;
-        submitButton.innerHTML = originalButtonText;
-    }
-});
+// Contact form handling removed to allow native form submission
+// See index.html for form action configuration
 
 // ===================================
 // PHONE NUMBER FORMATTING

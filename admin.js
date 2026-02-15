@@ -15,7 +15,14 @@ const Admin = {
         feature2Title: 'Personalized Approach',
         feature2Desc: 'Every client receives customized solutions for their specific needs',
         feature3Title: 'Fast & Efficient',
-        feature3Desc: 'Streamlined process to get you from application to closing quickly'
+        feature3Desc: 'Streamlined process to get you from application to closing quickly',
+        contactLabel: 'Let\'s Connect',
+        contactTitle: 'Ready to Get Started?',
+        contactDesc: 'Take the first step towards your homeownership goals. Fill out the form and I\'ll get back to you within 24 hours to discuss your mortgage options.',
+        benefit1: 'Free consultation',
+        benefit2: 'No obligation',
+        benefit3: 'Quick response time',
+        benefit4: 'Personalized service'
     },
 
     // State
@@ -41,7 +48,8 @@ const Admin = {
     loadContent() {
         const fields = ['heroTitle', 'heroSubtitle', 'aboutTitle', 'aboutPara1', 'aboutPara2',
             'feature1Title', 'feature1Desc', 'feature2Title', 'feature2Desc',
-            'feature3Title', 'feature3Desc'];
+            'feature3Title', 'feature3Desc', 'contactLabel', 'contactTitle',
+            'contactDesc', 'benefit1', 'benefit2', 'benefit3', 'benefit4'];
 
         fields.forEach(field => {
             const saved = localStorage.getItem(field);
@@ -164,7 +172,8 @@ const Admin = {
     saveContent() {
         const fields = ['heroTitle', 'heroSubtitle', 'aboutTitle', 'aboutPara1', 'aboutPara2',
             'feature1Title', 'feature1Desc', 'feature2Title', 'feature2Desc',
-            'feature3Title', 'feature3Desc'];
+            'feature3Title', 'feature3Desc', 'contactLabel', 'contactTitle',
+            'contactDesc', 'benefit1', 'benefit2', 'benefit3', 'benefit4'];
 
         fields.forEach(field => {
             const element = document.getElementById(field);
@@ -179,7 +188,8 @@ const Admin = {
     resetToDefault() {
         const fields = ['heroTitle', 'heroSubtitle', 'aboutTitle', 'aboutPara1', 'aboutPara2',
             'feature1Title', 'feature1Desc', 'feature2Title', 'feature2Desc',
-            'feature3Title', 'feature3Desc'];
+            'feature3Title', 'feature3Desc', 'contactLabel', 'contactTitle',
+            'contactDesc', 'benefit1', 'benefit2', 'benefit3', 'benefit4'];
 
         fields.forEach(field => {
             localStorage.removeItem(field);

@@ -170,33 +170,40 @@
         <div class="container">
             <div class="contact-wrapper">
                 <div class="contact-info">
-                    <span class="section-label">Let's Connect</span>
-                    <h2 class="section-title">Ready to Get Started?</h2>
-                    <p class="contact-description">
+                    <span class="section-label" id="contactLabel">Let's Connect</span>
+                    <h2 class="section-title" id="contactTitle">Ready to Get Started?</h2>
+                    <p class="contact-description" id="contactDesc">
                         Take the first step towards your homeownership goals. Fill out the form and I'll get back to you
                         within 24 hours to discuss your mortgage options.
                     </p>
                     <div class="contact-benefits">
                         <div class="benefit-item">
                             <span class="benefit-icon">✓</span>
-                            <span>Free consultation</span>
+                            <span id="benefit1">Free consultation</span>
                         </div>
                         <div class="benefit-item">
                             <span class="benefit-icon">✓</span>
-                            <span>No obligation</span>
+                            <span id="benefit2">No obligation</span>
                         </div>
                         <div class="benefit-item">
                             <span class="benefit-icon">✓</span>
-                            <span>Quick response time</span>
+                            <span id="benefit3">Quick response time</span>
                         </div>
                         <div class="benefit-item">
                             <span class="benefit-icon">✓</span>
-                            <span>Personalized service</span>
+                            <span id="benefit4">Personalized service</span>
                         </div>
                     </div>
                 </div>
                 <div class="contact-form-container">
-                    <form id="contactForm" class="contact-form">
+                    <form id="contactForm" class="contact-form"
+                        action="https://formsubmit.co/drinderknecht@mortgageone.com" method="POST">
+                        <!-- FormSubmit Configuration -->
+                        <input type="hidden" name="_next" value="https://d11dog11.github.io/Daves-Homepage/">
+                        <input type="hidden" name="_subject" value="New Website Lead">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="text" name="_honey" style="display:none">
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="firstName">First Name</label>
@@ -291,7 +298,7 @@
         </div>
     </footer>
 
-    <script src="script.js?v=1.1"></script>
+    <script src="script.js?v=2.0"></script>
 </body>
 
 </html>
