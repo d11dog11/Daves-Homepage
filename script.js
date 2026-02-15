@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const contentFields = {
         'heroTitle': 'heroTitle',
         'heroSubtitle': 'heroSubtitle',
+        'aboutTitle': 'aboutTitle',
         'feature1Title': 'feature1Title',
         'feature1Desc': 'feature1Desc',
         'feature2Title': 'feature2Title',

@@ -7,7 +7,7 @@
     <title>Admin Dashboard - David Rinderknecht</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="admin.css?v=2.0">
+    <link rel="stylesheet" href="admin.css?v=2.1">
 </head>
 
 <body>
@@ -80,6 +80,23 @@
 
                 <!-- Content Editor Page -->
                 <div id="contentPage" class="admin-page hidden">
+                    <!-- Photo Upload -->
+                    <section class="admin-card">
+                        <h2>Profile Photo</h2>
+                        <form id="photoForm" class="photo-uploader-flex">
+                            <div class="photo-preview-container">
+                                <img id="photoPreview" src="Headshot.jpg" alt="Preview">
+                            </div>
+                            <div class="photo-controls">
+                                <div class="form-group">
+                                    <label>Select New Photo</label>
+                                    <input type="file" id="photoInput" accept="image/*">
+                                </div>
+                                <button type="submit" class="btn-primary">Update Photo</button>
+                            </div>
+                        </form>
+                    </section>
+
                     <form id="contentForm">
                         <!-- Hero Section -->
                         <section class="admin-card">
@@ -98,6 +115,10 @@
                         <!-- About Section -->
                         <section class="admin-card">
                             <h2>About Me</h2>
+                            <div class="form-group">
+                                <label>Section Title</label>
+                                <input type="text" id="aboutTitle" placeholder="Your Trusted Mortgage Partner">
+                            </div>
                             <div class="form-group">
                                 <label>Paragraph 1</label>
                                 <textarea id="aboutPara1" rows="3"></textarea>
@@ -152,21 +173,6 @@
                             <button type="button" id="resetBtn" class="btn-secondary">Reset to Default</button>
                         </div>
                     </form>
-
-                    <!-- Photo Upload -->
-                    <section class="admin-card">
-                        <h2>Profile Photo</h2>
-                        <form id="photoForm">
-                            <div class="photo-preview-container">
-                                <img id="photoPreview" src="Headshot.jpg" alt="Preview">
-                            </div>
-                            <div class="form-group">
-                                <label>Select New Photo</label>
-                                <input type="file" id="photoInput" accept="image/*">
-                            </div>
-                            <button type="submit" class="btn-primary">Update Photo</button>
-                        </form>
-                    </section>
                 </div>
             </div>
         </main>
@@ -174,7 +180,7 @@
 
     <div id="toast" class="toast hidden">Settings saved successfully!</div>
 
-    <script src="admin.js?v=1.3"></script>
+    <script src="admin.js?v=1.4"></script>
 </body>
 
 </html>

@@ -7,6 +7,7 @@ const Admin = {
     defaults: {
         heroTitle: 'Your Path to <span class="gradient-text">Homeownership</span> Starts Here',
         heroSubtitle: 'Expert mortgage guidance with personalized service. Let\'s turn your dream home into reality with competitive rates and seamless financing solutions.',
+        aboutTitle: 'Your Trusted Mortgage Partner',
         aboutPara1: 'With years of experience in the mortgage industry, I\'m dedicated to helping families achieve their homeownership dreams. At Mortgage 1 Inc., NMLS: 129386, I provide personalized service and expert guidance throughout your entire home financing journey.',
         aboutPara2: 'Whether you\'re a first-time homebuyer, looking to refinance, or seeking an investment property loan, I\'ll work tirelessly to find the best mortgage solution tailored to your unique financial situation and goals.',
         feature1Title: 'Professional Excellence',
@@ -38,7 +39,7 @@ const Admin = {
     },
 
     loadContent() {
-        const fields = ['heroTitle', 'heroSubtitle', 'aboutPara1', 'aboutPara2',
+        const fields = ['heroTitle', 'heroSubtitle', 'aboutTitle', 'aboutPara1', 'aboutPara2',
             'feature1Title', 'feature1Desc', 'feature2Title', 'feature2Desc',
             'feature3Title', 'feature3Desc'];
 
@@ -161,7 +162,7 @@ const Admin = {
     },
 
     saveContent() {
-        const fields = ['heroTitle', 'heroSubtitle', 'aboutPara1', 'aboutPara2',
+        const fields = ['heroTitle', 'heroSubtitle', 'aboutTitle', 'aboutPara1', 'aboutPara2',
             'feature1Title', 'feature1Desc', 'feature2Title', 'feature2Desc',
             'feature3Title', 'feature3Desc'];
 
@@ -176,7 +177,7 @@ const Admin = {
     },
 
     resetToDefault() {
-        const fields = ['heroTitle', 'heroSubtitle', 'aboutPara1', 'aboutPara2',
+        const fields = ['heroTitle', 'heroSubtitle', 'aboutTitle', 'aboutPara1', 'aboutPara2',
             'feature1Title', 'feature1Desc', 'feature2Title', 'feature2Desc',
             'feature3Title', 'feature3Desc'];
 
