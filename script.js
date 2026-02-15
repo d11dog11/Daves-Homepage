@@ -127,8 +127,22 @@ window.addEventListener('scroll', () => {
 // CONTACT FORM HANDLING
 // ===================================
 
-// Contact form handling removed to allow native form submission
-// See index.html for form action configuration
+// Handle form submission UI (Optimistic update)
+// The form submits to a hidden iframe, so the page doesn't reload.
+// We manually hide the form and show the success message.
+const contactForm = document.getElementById('contactForm');
+const formSuccess = document.getElementById('formSuccess');
+
+if (contactForm && formSuccess) {
+    contactForm.addEventListener('submit', () => {
+        // Hide form and show success message immediately
+        setTimeout(() => {
+            contactForm.classList.add('hidden');
+            formSuccess.classList.remove('hidden');
+            contactForm.reset();
+        }, 100); // Small delay to ensure submission starts
+    });
+}
 
 // ===================================
 // PHONE NUMBER FORMATTING

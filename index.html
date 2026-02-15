@@ -196,10 +196,13 @@
                     </div>
                 </div>
                 <div class="contact-form-container">
+                    <!-- Hidden iframe for silent submission -->
+                    <iframe name="hiddenFrame" style="display:none;"></iframe>
+
                     <form id="contactForm" class="contact-form"
-                        action="https://formsubmit.co/drinderknecht@mortgageone.com" method="POST">
+                        action="https://formsubmit.co/drinderknecht@mortgageone.com" method="POST" target="hiddenFrame">
+
                         <!-- FormSubmit Configuration -->
-                        <input type="hidden" name="_next" value="https://d11dog11.github.io/Daves-Homepage/">
                         <input type="hidden" name="_subject" value="New Website Lead">
                         <input type="hidden" name="_captcha" value="false">
                         <input type="hidden" name="_template" value="table">
@@ -303,7 +306,7 @@
         </div>
     </footer>
 
-    <script src="script.js?v=2.3"></script>
+    <script src="script.js?v=2.4"></script>
 </body>
 
 </html>
