@@ -30,12 +30,20 @@ Simply double-click `index.html` to open it in your default browser.
 ### Option 2: Local Server (Recommended)
 For the best experience, serve the files through a local web server:
 
+**Using Included Server Script:**
+1. Open this folder in terminal
+2. Run:
+```bash
+node server.js
+```
+3. Click: [http://localhost:3001](http://localhost:3001)
+
 **Using Python:**
 ```bash
 python -m http.server 8080
 ```
 
-**Using Node.js:**
+**Using Node.js (npx):**
 ```bash
 npx http-server -p 8080
 ```
