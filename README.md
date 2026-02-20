@@ -110,6 +110,15 @@ Works on all modern browsers:
 5. ✅ Add Google Analytics (optional)
 6. ✅ Deploy to web hosting
 
+## Deployment
+
+🚀 **Automated Verification**: This repository is configured with GitHub Actions.
+Any push to the `main` branch automatically deploys to the DigitalOcean droplet via SSH.
+
+- **URL**: [https://mylenderdave.com](https://mylenderdave.com)
+- **Server**: DigitalOcean Droplet (Ubuntu/Node.js/Nginx)
+- **SSL**: Self-signed (CF Full Mode)
+
 ## License
 
 © 2026 David Rinderknecht - Mortgage 1 Inc. All rights reserved.
