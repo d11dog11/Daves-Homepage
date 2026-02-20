@@ -196,16 +196,14 @@
                     </div>
                 </div>
                 <div class="contact-form-container">
-                    <!-- Hidden iframe for silent submission -->
-                    <iframe name="hiddenFrame" style="display:none;"></iframe>
-
                     <form id="contactForm" class="contact-form"
-                        action="https://formsubmit.co/drinderknecht@mortgageone.com" method="POST" target="hiddenFrame">
-
-                        <!-- FormSubmit Configuration -->
-                        <input type="hidden" name="_subject" value="New Website Lead">
+                        action="https://formsubmit.co/drinderknecht@mortgageone.com" method="POST">
+                        <input type="hidden" name="_next" value="https://mylenderdave.com/">
+                        <input type="hidden" name="_subject" value="New Website Lead - mylenderdave.com">
                         <input type="hidden" name="_captcha" value="false">
                         <input type="hidden" name="_template" value="table">
+
+                        <!-- Honeypot spam trap -->
                         <input type="text" name="_honey" style="display:none">
 
                         <div class="form-row">

@@ -118,20 +118,23 @@ window.addEventListener('scroll', () => {
 // CONTACT FORM HANDLING
 // ===================================
 
-// Handle form submission UI (Optimistic update)
-// The form submits to a hidden iframe, so the page doesn't reload.
-// We manually hide the form and show the success message.
 const contactForm = document.getElementById('contactForm');
 const formSuccess = document.getElementById('formSuccess');
+const submitBtn = contactForm ? contactForm.querySelector('button[type="submit"]') : null;
 
 if (contactForm && formSuccess) {
     contactForm.addEventListener('submit', () => {
-        // Hide form and show success message immediately
-        setTimeout(() => {
-            contactForm.classList.add('hidden');
-            formSuccess.classList.remove('hidden');
-            contactForm.reset();
-        }, 100); // Small delay to ensure submission starts
+        // Disable button to prevent double-submit
+        if (submitBtn) {
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+
+            // Optional: re-enable after timeout just in case the browser cancels navigation
+            setTimeout(() => {
+                submitBtn.textContent = 'Request Contact →';
+                submitBtn.disabled = false;
+            }, 3000);
+        }
     });
 }
 
