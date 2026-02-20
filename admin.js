@@ -27,7 +27,6 @@ const Admin = {
 
     // State
     config: {
-        password: localStorage.getItem('adminPassword') || '1234',
         photo: localStorage.getItem('heroImage') || ''
     },
 
@@ -70,6 +69,7 @@ const Admin = {
         // Logout
         document.getElementById('logoutBtn').addEventListener('click', () => {
             sessionStorage.removeItem('isLoggedIn');
+            sessionStorage.removeItem('authToken');
             window.location.reload();
         });
 
@@ -158,15 +158,30 @@ const Admin = {
     },
 
     handleLogin() {
-        const input = document.getElementById('passwordInput').value;
-        if (input === this.config.password) {
-            sessionStorage.setItem('isLoggedIn', 'true');
-            document.getElementById('loginOverlay').classList.add('hidden');
-            document.getElementById('adminDashboard').classList.remove('hidden');
-            document.getElementById('loginError').classList.add('hidden');
-        } else {
-            document.getElementById('loginError').classList.remove('hidden');
-        }
+        const passwordInput = document.getElementById('passwordInput').value;
+
+        fetch('/api/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ password: passwordInput })
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    sessionStorage.setItem('isLoggedIn', 'true');
+                    sessionStorage.setItem('authToken', data.token);
+                    document.getElementById('loginOverlay').classList.add('hidden');
+                    document.getElementById('adminDashboard').classList.remove('hidden');
+                    document.getElementById('loginError').classList.add('hidden');
+                } else {
+                    document.getElementById('loginError').textContent = data.error || 'Login failed';
+                    document.getElementById('loginError').classList.remove('hidden');
+                }
+            })
+            .catch(err => {
+                console.error('Login error:', err);
+                document.getElementById('loginError').classList.remove('hidden');
+            });
     },
 
     async saveContent() {
@@ -183,17 +198,27 @@ const Admin = {
             }
         });
 
+        const token = sessionStorage.getItem('authToken');
+
         try {
             const response = await fetch('/api/content', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
                 body: JSON.stringify(data)
             });
 
             if (response.ok) {
                 this.showToast('All changes saved to server successfully!');
             } else {
-                throw new Error('Server responded with error');
+                if (response.status === 401) {
+                    alert('Session expired. Please login again.');
+                    window.location.reload();
+                } else {
+                    throw new Error('Server responded with error');
+                }
             }
         } catch (err) {
             console.error('Error saving content:', err);
@@ -202,10 +227,14 @@ const Admin = {
     },
 
     async resetToDefault() {
+        const token = sessionStorage.getItem('authToken');
         try {
             const response = await fetch('/api/content', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
                 body: JSON.stringify(this.defaults)
             });
 
@@ -236,7 +265,7 @@ const Admin = {
                 const base64 = e.target.result;
                 try {
                     localStorage.setItem('heroImage', base64);
-                    this.showToast('Profile photo updated!');
+                    this.showToast('Profile photo updated (Local Only)!');
                 } catch (err) {
                     alert('Image file is too large for local storage.');
                 }
@@ -254,15 +283,34 @@ const Admin = {
             return;
         }
 
-        if (p1.length < 4) {
-            alert("Password must be at least 4 characters");
+        if (p1.length < 8) {
+            alert("Password must be at least 8 characters");
             return;
         }
 
-        localStorage.setItem('adminPassword', p1);
-        this.config.password = p1;
-        this.showToast('Password changed successfully');
-        document.getElementById('passwordForm').reset();
+        const token = sessionStorage.getItem('authToken');
+
+        fetch('/api/password', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ newPassword: p1 })
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    this.showToast('Password changed successfully');
+                    document.getElementById('passwordForm').reset();
+                } else {
+                    alert(data.error || 'Failed to change password');
+                }
+            })
+            .catch(err => {
+                console.error('Password change error:', err);
+                alert('An error occurred');
+            });
     },
 
     showToast(message) {
