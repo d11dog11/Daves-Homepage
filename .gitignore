@@ -11,6 +11,7 @@ npm-debug.log*
 node_modules/
 # package-lock.json # Removed to allow tracking
 auth.json
+dynamic-content.json
 
 # Editor directories and files
 .idea

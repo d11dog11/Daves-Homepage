@@ -4,10 +4,14 @@ const path = require('path');
 
 const port = 3001;
 const CONTENT_FILE = path.join(__dirname, 'content.json');
+const DYNAMIC_CONTENT_FILE = path.join(__dirname, 'dynamic-content.json');
 
 // Helper to read content
 const getSiteContent = () => {
     try {
+        if (fs.existsSync(DYNAMIC_CONTENT_FILE)) {
+            return fs.readFileSync(DYNAMIC_CONTENT_FILE, 'utf8');
+        }
         if (fs.existsSync(CONTENT_FILE)) {
             return fs.readFileSync(CONTENT_FILE, 'utf8');
         }
@@ -112,7 +116,8 @@ http.createServer((req, res) => {
                 req.on('end', () => {
                     try {
                         const data = JSON.parse(body);
-                        fs.writeFileSync(CONTENT_FILE, JSON.stringify(data, null, 2));
+                        // Write to dynamic file to avoid git conflicts
+                        fs.writeFileSync(DYNAMIC_CONTENT_FILE, JSON.stringify(data, null, 2));
                         res.writeHead(200, { 'Content-Type': 'application/json' });
                         res.end(JSON.stringify({ success: true }));
                     } catch (err) {
