@@ -169,37 +169,63 @@ const Admin = {
         }
     },
 
-    saveContent() {
+    async saveContent() {
         const fields = ['heroTitle', 'heroSubtitle', 'aboutTitle', 'aboutPara1', 'aboutPara2',
             'feature1Title', 'feature1Desc', 'feature2Title', 'feature2Desc',
             'feature3Title', 'feature3Desc', 'contactLabel', 'contactTitle',
             'contactDesc', 'benefit1', 'benefit2', 'benefit3', 'benefit4'];
 
+        const data = {};
         fields.forEach(field => {
             const element = document.getElementById(field);
             if (element) {
-                localStorage.setItem(field, element.value);
+                data[field] = element.value;
             }
         });
 
-        this.showToast('All changes saved successfully!');
+        try {
+            const response = await fetch('/api/content', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                this.showToast('All changes saved to server successfully!');
+            } else {
+                throw new Error('Server responded with error');
+            }
+        } catch (err) {
+            console.error('Error saving content:', err);
+            this.showToast('Failed to save content to server.');
+        }
     },
 
-    resetToDefault() {
-        const fields = ['heroTitle', 'heroSubtitle', 'aboutTitle', 'aboutPara1', 'aboutPara2',
-            'feature1Title', 'feature1Desc', 'feature2Title', 'feature2Desc',
-            'feature3Title', 'feature3Desc', 'contactLabel', 'contactTitle',
-            'contactDesc', 'benefit1', 'benefit2', 'benefit3', 'benefit4'];
+    async resetToDefault() {
+        try {
+            const response = await fetch('/api/content', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(this.defaults)
+            });
 
-        fields.forEach(field => {
-            localStorage.removeItem(field);
-            const element = document.getElementById(field);
-            if (element) {
-                element.value = this.defaults[field] || '';
+            if (response.ok) {
+                const fields = ['heroTitle', 'heroSubtitle', 'aboutTitle', 'aboutPara1', 'aboutPara2',
+                    'feature1Title', 'feature1Desc', 'feature2Title', 'feature2Desc',
+                    'feature3Title', 'feature3Desc', 'contactLabel', 'contactTitle',
+                    'contactDesc', 'benefit1', 'benefit2', 'benefit3', 'benefit4'];
+
+                fields.forEach(field => {
+                    const element = document.getElementById(field);
+                    if (element) {
+                        element.value = this.defaults[field] || '';
+                    }
+                });
+                this.showToast('Content reset to default values on server');
             }
-        });
-
-        this.showToast('Content reset to default values');
+        } catch (err) {
+            console.error('Error resetting content:', err);
+        }
     },
 
     updatePhoto() {

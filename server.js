@@ -3,9 +3,50 @@ const fs = require('fs');
 const path = require('path');
 
 const port = 3001;
+const CONTENT_FILE = path.join(__dirname, 'content.json');
+
+// Helper to read content
+const getSiteContent = () => {
+    try {
+        if (fs.existsSync(CONTENT_FILE)) {
+            return fs.readFileSync(CONTENT_FILE, 'utf8');
+        }
+    } catch (err) {
+        console.error('Error reading content file:', err);
+    }
+    return JSON.stringify({});
+};
 
 http.createServer((req, res) => {
-    // Remove query parameters (e.g. ?v=2.4)
+    // API Routes
+    if (req.url.startsWith('/api/content')) {
+        if (req.method === 'GET') {
+            res.writeHead(200, { 'Content-Type': 'application/json' });
+            return res.end(getSiteContent());
+        }
+
+        if (req.method === 'POST') {
+            let body = '';
+            req.on('data', chunk => { body += chunk.toString(); });
+            req.on('end', () => {
+                try {
+                    const data = JSON.parse(body);
+                    // Simple validation: check for a password or token if you want, 
+                    // but for now we'll rely on the admin panel password logic 
+                    // and just save the content data.
+                    fs.writeFileSync(CONTENT_FILE, JSON.stringify(data, null, 2));
+                    res.writeHead(200, { 'Content-Type': 'application/json' });
+                    res.end(JSON.stringify({ success: true }));
+                } catch (err) {
+                    res.writeHead(400);
+                    res.end(JSON.stringify({ error: 'Invalid JSON' }));
+                }
+            });
+            return;
+        }
+    }
+
+    // Static File Server
     let requestUrl = req.url.split('?')[0];
     let filePath = '.' + requestUrl;
     if (filePath === './') {
@@ -29,15 +70,12 @@ http.createServer((req, res) => {
     fs.readFile(filePath, (error, content) => {
         if (error) {
             if (error.code == 'ENOENT') {
-                fs.readFile('./404.html', (error, content) => {
-                    res.writeHead(404, { 'Content-Type': 'text/html' });
-                    res.end('<h1>404 Not Found</h1>', 'utf-8');
-                });
+                res.writeHead(404, { 'Content-Type': 'text/html' });
+                res.end('<h1>404 Not Found</h1>', 'utf-8');
             }
             else {
                 res.writeHead(500);
-                res.end('Sorry, check with the site admin for error: ' + error.code + ' ..\n');
-                res.end();
+                res.end('Server error: ' + error.code);
             }
         }
         else {

@@ -1,0 +1,25 @@
+{
+  "name": "daves-homepage",
+  "version": "1.0.0",
+  "description": "A modern, premium homepage for David Rinderknecht, Mortgage Lender at Mortgage 1 Inc.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "browser-sync start --server --files '*.html, *.css, *.js' --port 3001"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/d11dog11/Daves-Homepage.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/d11dog11/Daves-Homepage/issues"
+  },
+  "homepage": "https://github.com/d11dog11/Daves-Homepage#readme",
+  "devDependencies": {
+    "browser-sync": "^3.0.4"
+  }
+}

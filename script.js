@@ -2,55 +2,46 @@
 // LOAD DYNAMIC CONTENT (ADMIN CHANGES)
 // ===================================
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Load all saved content
-    const contentFields = {
-        'heroTitle': 'heroTitle',
-        'heroSubtitle': 'heroSubtitle',
-        'aboutTitle': 'aboutTitle',
-        'feature1Title': 'feature1Title',
-        'feature1Desc': 'feature1Desc',
-        'feature2Title': 'feature2Title',
-        'feature2Desc': 'feature2Desc',
-        'feature3Title': 'feature3Title',
-        'feature3Desc': 'feature3Desc',
-        'contactLabel': 'contactLabel',
-        'contactTitle': 'contactTitle',
-        'contactDesc': 'contactDesc',
-        'benefit1': 'benefit1',
-        'benefit2': 'benefit2',
-        'benefit3': 'benefit3',
-        'benefit4': 'benefit4'
-    };
+document.addEventListener('DOMContentLoaded', async () => {
+    // Fetch content from server
+    try {
+        const response = await fetch('/api/content');
+        const data = await response.json();
 
-    // Update text content
-    Object.keys(contentFields).forEach(key => {
-        const saved = localStorage.getItem(key);
-        if (saved) {
-            const element = document.getElementById(key);
-            if (element) {
-                element.innerHTML = saved;
+        // Update basic text fields
+        const contentFields = [
+            'heroTitle', 'heroSubtitle', 'aboutTitle',
+            'feature1Title', 'feature1Desc', 'feature2Title', 'feature2Desc',
+            'feature3Title', 'feature3Desc', 'contactLabel', 'contactTitle',
+            'contactDesc', 'benefit1', 'benefit2', 'benefit3', 'benefit4'
+        ];
+
+        contentFields.forEach(key => {
+            const val = data[key];
+            if (val) {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.innerHTML = val;
+                }
             }
+        });
+
+        // Update About section (paragraphs)
+        const aboutDiv = document.getElementById('aboutContent');
+        if (aboutDiv && (data.aboutPara1 || data.aboutPara2)) {
+            let html = '';
+            if (data.aboutPara1) html += `<p>${data.aboutPara1}</p>`;
+            if (data.aboutPara2) html += `<p>${data.aboutPara2}</p>`;
+            aboutDiv.innerHTML = html;
         }
-    });
 
-    // Update About section (paragraphs)
-    const aboutPara1 = localStorage.getItem('aboutPara1');
-    const aboutPara2 = localStorage.getItem('aboutPara2');
-    const aboutDiv = document.getElementById('aboutContent');
-
-    if (aboutDiv && (aboutPara1 || aboutPara2)) {
-        let html = '';
-        if (aboutPara1) html += `<p>${aboutPara1}</p>`;
-        if (aboutPara2) html += `<p>${aboutPara2}</p>`;
-        aboutDiv.innerHTML = html;
-    }
-
-    // Update Photo
-    const savedPhoto = localStorage.getItem('heroImage');
-    if (savedPhoto) {
-        const heroImg = document.getElementById('heroImage');
-        if (heroImg) heroImg.src = savedPhoto;
+        // Update Photo
+        if (data.heroImage) {
+            const heroImg = document.getElementById('heroImage');
+            if (heroImg) heroImg.src = data.heroImage;
+        }
+    } catch (err) {
+        console.error('Error loading site content:', err);
     }
 });
 
