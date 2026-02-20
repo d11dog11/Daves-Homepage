@@ -16,6 +16,12 @@ A modern, premium homepage for David Rinderknecht, Mortgage Lender at Mortgage 1
 - **Services Section**: Mortgage solutions offered
 - **Contact Form**: Easy-to-use contact request form
 
+🔒 **Admin Dashboard**
+- **Secure Login**: Token-based authentication
+- **Content Editor**: Update text and settings without coding
+- **Security**: Change admin password securely
+- **View Password**: Toggle visibility for password fields
+
 📱 **Contact Form Fields**
 - First Name
 - Last Name
@@ -52,37 +58,43 @@ Then visit: `http://localhost:8080`
 
 ## Customization
 
-### Update the Photo
-Replace the placeholder by updating the HTML in `index.html`:
-1. Find the `.placeholder-image` div (around line 67)
-2. Replace it with:
-```html
-<img src="your-photo.jpg" alt="David Rinderknecht - Mortgage Lender">
-```
+### 📝 Using the Admin Dashboard (Recommended)
+Most text content on the site can be updated directly from the secure admin panel:
+1. Navigate to `/admin.html`
+2. Log in with your secure password
+3. Go to the "Content Editor" tab
+4. Update fields and click "Save All Changes"
 
-### Update About Section
-Edit the content in the `#about` section in `index.html` (around line 90-130)
+### Manual Updates (Advanced)
+For structural changes or permanent image updates, edit the files directly:
 
-### Update Contact Form
-The form currently logs submissions to the browser console. To connect it to a backend:
-1. Open `script.js`
-2. Find the form submission handler (around line 60)
-3. Uncomment and update the fetch API call with your endpoint
+#### Update the Photo
+The admin panel photo upload is currently local-only. To permanently update the site photo:
+1. Replace `Headshot.jpg` in the root folder with your new image (keep the name or update `index.html`).
+2. Update the `src` attribute in `index.html` if the filename changed.
+
+#### Update Contact Form
+The form submits to `formsubmit.co`. To change the recipient email:
+1. Open `index.html`
+2. Update the `action` attribute in the `<form>` tag.
 
 ## File Structure
 
-```
 ├── index.html          # Main HTML structure
 ├── index.css           # Complete design system and styles
 ├── script.js           # Interactive functionality
+├── admin.html          # Admin Dashboard
+├── admin.js            # Admin panel logic (secure)
+├── server.js           # Node.js backend server
+├── content.json        # Dynamic content storage (auto-generated)
 └── README.md           # This file
-```
 
 ## Technologies Used
 
-- **HTML5**: Semantic markup with SEO best practices
-- **CSS3**: Modern design system with CSS variables
-- **Vanilla JavaScript**: No dependencies, pure JS
+- **HTML5/CSS3**: Modern standards
+- **Vanilla JavaScript**: Lightweight frontend
+- **Node.js**: Secure backend for content management
+- **GitHub Actions**: Automated deployment pipeline
 - **Google Fonts**: Inter & Playfair Display
 
 ## Design Features
